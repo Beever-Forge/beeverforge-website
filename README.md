@@ -1,34 +1,30 @@
 # BeeverForge website
 
-Three complete directions for the BeeverForge marketing website:
+Three complete preview directions for the BeeverForge marketing site:
 
-- `/v1/` — premium, product-led introduction
-- `/v2/` — delivery-system narrative
-- `/v3/` — portfolio and leadership narrative
+- `/v1/` — institutional clarity and buying decisions
+- `/v2/` — product workflow and interactive stage explorer
+- `/v3/` — strategy, portfolio and architecture narrative
 
-This is a dependency-free static website. Preview it from the repository root with any static HTTP server, then open the desired path.
+This is a dependency-free static site. Generate the English previews with `node scripts/build-previews.mjs`, then serve the repository root with `python -m http.server 8765`. Open `http://localhost:8765/v1/`, `/v2/` or `/v3/`.
 
-## Prévias em pt-BR (branch `feat/three-ptbr-concepts`)
+The generator shares product copy, the capability matrix, workflow steps and metadata. `assets/previews.css` gives each version its own composition; `assets/previews.js` handles navigation and the V2 explorer. The existing homepage contact form is reused with the same Cloudflare Worker endpoint, fields and `assets/site.js` submission logic. On localhost, the live Worker rejects the origin by design; the form works when served on the allowlisted public domain. A mailto fallback is available in every preview.
 
-As três propostas novas são geradas por `node scripts/build-previews.mjs` em `v1/index.html`, `v2/index.html` e `v3/index.html`. O gerador compartilha conteúdo, matriz, fluxo, metadados e navegação. `assets/previews.css` dá a cada versão uma composição própria; `assets/previews.js` cuida do menu e do explorador de etapas da V2. Para testar, execute `python -m http.server 8765` na raiz e abra `http://localhost:8765/v1/`, `/v2/` e `/v3/`.
+Each preview has `noindex,follow`, its own canonical and Open Graph URL, and is absent from `sitemap.xml`. The existing public homepage and deployment workflow remain unchanged. That workflow copies only the root and assets to GitHub Pages; pushing this review branch does not publish the previews. The domain was shown as active with SSL in Hostinger hPanel on October 18, 2026, but that does not establish Hostinger as the web host.
 
-Estas rotas são prévias: cada página tem `noindex,follow`, canonical próprio e está fora de `sitemap.xml`. A página pública da raiz e o workflow de publicação existente foram preservados. O workflow atual copia apenas a raiz e os ativos para GitHub Pages; portanto, estas três prévias ainda **não** são publicadas por um push desta branch. A instalação do domínio no painel Hostinger não implica uma hospedagem Hostinger ativa. O estado de domínio lido no hPanel em 18/10/2026 mostra domínio ativo, SSL ativo e nameservers `horizon.dns-parking.com` e `orbit.dns-parking.com`; isso não prova qual serviço entrega o site.
+See [PRODUCT_MATRIX.md](PRODUCT_MATRIX.md) for sources and availability, and [REVIEW.md](REVIEW.md) for local checks.
 
-O endereço `contact@beeverforge.com` foi confirmado por um teste recebido no Gmail e registro de entrega no Resend em 17/10/2026. As prévias usam um link `mailto:` e não têm formulário ativo. O Worker da página anterior não foi retestado nestas versões.
+## After choosing a direction
 
-### Depois da escolha
-
-1. Confirmar a versão vencedora, o canal comercial, a disponibilidade real de cada módulo Enterprise e a infraestrutura de hospedagem.
-2. Trazer a composição escolhida para `/`, ajustar canonical e Open Graph para a raiz e incluir somente a raiz no sitemap. Decidir se `/v1`, `/v2` e `/v3` serão removidas ou mantidas como prévias `noindex`; se removidas, criar redirecionamentos permanentes para `/`.
-3. Configurar e testar o destino do contato antes de ativar qualquer formulário. Verificar DNS, HTTPS e resposta da raiz antes de liberar indexação.
-4. Planejar redirecionamentos de URLs equivalentes de `openfactory.digital` para `beeverforge.com` em uma etapa separada, com inventário de URLs e aprovação para alterar o domínio anterior.
-
-Ver [PRODUCT_MATRIX.md](PRODUCT_MATRIX.md) para fontes e pendências e [REVIEW.md](REVIEW.md) para os testes locais.
+1. Confirm the preferred version and the actual availability of Enterprise capabilities.
+2. Move the chosen composition to `/`, update the root canonical and social metadata, and include only the root in the public sitemap. Remove the comparison routes or retain them as `noindex` previews; redirect removed routes to `/`.
+3. Test the reused contact form from the deployed origin, then verify DNS, HTTPS and direct routes before allowing indexation.
+4. Inventory equivalent `openfactory.digital` URLs and plan their redirects separately. Changing the former domain requires authorization.
 
 ## Brand assets
 
-Approved BeeverForge master assets are kept in `assets/`. The wordmark is supplied as the approved vector artwork and must not be recreated as text.
+Approved BeeverForge master assets are in `assets/`. The wordmark is official vector artwork and must not be recreated as text.
 
 ## Deployment
 
-The site is ready for GitHub Pages or any static hosting provider. Publish the repository root as the web root and point `beeverforge.com` to the hosting provider. HTTPS must be enabled before the canonical, Open Graph and sitemap URLs are indexed.
+The site can be published with GitHub Pages or another static hosting provider. GitHub stores the code; the service serving the files is the host. Hostinger currently administers the domain. Publishing to the main domain, changing DNS and replacing the public homepage require approval of the selected version.

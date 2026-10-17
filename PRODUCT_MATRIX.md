@@ -1,20 +1,20 @@
-# Matriz de produto para as três prévias
+# Product capability matrix for the three previews
 
-Referência Community: checkout local de `openfactory-core` em `da345623` (13/10/2026), [README](https://github.com/Open-Factory-Digital/openfactory-core) e `docs/STATUS.md` (estado documentado em 26/08/2026). O texto de status pode estar mais antigo que o código; não há validação operacional independente deste site. Enterprise: direção de produto fornecida no briefing, sem código ou lançamento verificado.
+Community reference: local `openfactory-core` checkout at `da345623` (October 13, 2026), its [README](https://github.com/Open-Factory-Digital/openfactory-core) and `docs/STATUS.md` (documented snapshot dated August 26, 2026). Enterprise statements come from the owner's brief; no released Enterprise implementation was verified.
 
-| Capacidade | Edição | Disponibilidade | Benefício | Fonte | Pendência |
+| Capability | Edition | Availability | Benefit | Source | To confirm |
 |---|---|---|---|---|---|
-| Orquestração de agentes, tickets e PRs | Community e base Enterprise | Código e documentação disponíveis | Executar trabalho a partir de demandas rastreáveis | README, STATUS | Confirmar edição de marca no lançamento |
-| Verificações do projeto e revisão independente | Community e base Enterprise | Código e documentação disponíveis; dependem de configuração | Evidência antes da decisão de merge | README, STATUS | Configuração por projeto |
-| Integrações GitHub, Jira e Azure DevOps | Community e base Enterprise | Adaptadores documentados; combinações exigem configuração | Usar ferramentas existentes | README, STATUS | Credenciais e setup por ambiente |
-| Operação local ou Docker | Community e base Enterprise | Documentada | Escolher a forma de operação | README, ONBOARDING | Custos de agentes e infraestrutura são externos |
-| Política de merge e promoção | Community e base Enterprise | Documentada | Preservar decisões humanas conforme política | README, STATUS | Revisão é consultiva por padrão; configuração importa |
-| Fluxo Product Owner (PO) | Community e base Enterprise | Documentado como opcional | Preparar requisitos para execução | README, docs/reference/product-role.md | PO do fluxo Enterprise não tem natureza humana/automática confirmada |
-| Prototype Builder e handoff de requisitos | Enterprise | Em desenvolvimento, exclusivo | Dar forma à ideia e estruturar requisitos | Briefing do proprietário | Prazo, demonstração e escopo final |
-| Portfolio Manager e consulta RAG | Enterprise | Em desenvolvimento, exclusivo | Contextualizar demanda no portfólio | Briefing do proprietário | Fontes de conhecimento e implementação |
-| Arquiteto Virtual e ADRs | Enterprise | Em desenvolvimento, exclusivo | Explicitar desenho e decisões técnicas | Briefing do proprietário | Escopo e processo de aprovação |
-| SSO | Enterprise | Disponibilidade técnica não confirmada | Integrar autenticação corporativa | Briefing do proprietário | Protocolos e data de entrega |
-| RBAC | Enterprise | Disponibilidade técnica não confirmada | Controlar acesso por papel | Briefing do proprietário | Matriz de papéis e data de entrega |
-| Suporte comercial BeeverForge | Enterprise | Oferta informada; condições não confirmadas | Acompanhamento comercial | Briefing do proprietário | Canal, horário, SLA e contrato |
+| Development orchestration, tickets and pull requests | Community and Enterprise core | Code and documentation available | Execute traceable development work | README, STATUS | Brand edition at launch |
+| Project checks and independent review | Community and Enterprise core | Available; requires configuration | Evidence before merge decisions | README, STATUS | Per-project setup |
+| GitHub, Jira and Azure DevOps adapters | Community and Enterprise core | Documented adapters | Use existing tools | README, STATUS | Credentials and environment setup |
+| Local or Docker operation | Community and Enterprise core | Documented | Choose an operating model | README, ONBOARDING | External agent and infrastructure costs |
+| Merge and promotion policy | Community and Enterprise core | Documented | Preserve human decisions according to policy | README, STATUS | Review is advisory by default |
+| Product Owner (PO) workflow | Community and Enterprise core | Documented as optional | Prepare requirements for execution | README, product-role reference | Enterprise PO role and handoff details |
+| Prototype Builder and requirements handoff | Enterprise | Exclusive, in development | Shape the idea and structure requirements | Owner's brief | Launch date and final scope |
+| Portfolio Manager and RAG retrieval | Enterprise | Exclusive, in development | Place demand in organizational context | Owner's brief | Knowledge sources and implementation |
+| Virtual Architect and ADRs | Enterprise | Exclusive, in development | Record design and technical decisions | Owner's brief | Scope and approval process |
+| SSO | Enterprise | Technical availability unconfirmed | Integrate corporate authentication | Owner's brief | Protocols and release date |
+| RBAC | Enterprise | Technical availability unconfirmed | Control access by role | Owner's brief | Role matrix and release date |
+| BeeverForge commercial support | Enterprise | Offer stated; terms unconfirmed | Commercial guidance | Owner's brief | Channel, hours, SLA and contract |
 
-O endereço `contact@beeverforge.com` foi confirmado por teste recebido no Gmail e registro de entrega no Resend em 17/10/2026. As prévias usam `mailto:` e não enviam formulários automaticamente. O endpoint do formulário anterior não foi retestado nestas versões.
+The existing homepage form uses the Cloudflare Worker endpoint configured in `scripts/build.mjs`. The same endpoint, fields, validation and response handling are reused in all three previews. `contact@beeverforge.com` received a test on October 17, 2026, and Resend showed delivery. The form was not sent live from these local previews because the Worker allowlist accepts the public domain, not localhost.
