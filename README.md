@@ -1,12 +1,10 @@
 # BeeverForge website
 
-Three complete directions for the BeeverForge marketing website:
+The English V1 is published at `/v1/`. It presents the Community core, the Enterprise direction, a capability matrix, the planned workflow, and the same inquiry form used on the existing homepage. The V1 uses a white base and cool neutral surfaces.
 
-- `/v1/` — premium, product-led introduction
-- `/v2/` — delivery-system narrative
-- `/v3/` — portfolio and leadership narrative
+The GitHub Pages workflow publishes the existing root, shared assets, thank-you page and `/v1/`. The root is preserved. `/v1/` remains `noindex` and absent from the sitemap while it lives alongside the existing homepage.
 
-This is a dependency-free static website. Preview it from the repository root with any static HTTP server, then open the desired path.
+To preview locally, serve the repository root with any static HTTP server and open `/v1/`. The Cloudflare Worker permits submissions from `beeverforge.com` and `www.beeverforge.com`; it intentionally rejects localhost.
 
 ## Brand assets
 
