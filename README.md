@@ -1,10 +1,10 @@
 # BeeverForge website
 
-The English V1 is published at `/v1/`. It presents the Community core, the Enterprise direction, a capability matrix, the planned workflow, and the same inquiry form used on the existing homepage. The V1 uses a white base and cool neutral surfaces.
+The English V1 and V2 are published at `/v1/` and `/v2/`. Both present the Community core, the Enterprise direction, a capability matrix, the planned workflow, and the same inquiry form used on the existing homepage. V1 uses a white base and cool neutral surfaces. V2 uses a predominantly graphite product interface.
 
-The GitHub Pages workflow publishes the existing root, shared assets, thank-you page and `/v1/`. The root is preserved. `/v1/` remains `noindex` and absent from the sitemap while it lives alongside the existing homepage.
+The GitHub Pages workflow publishes the existing root, shared assets, thank-you page, `/v1/` and `/v2/`. The root is preserved. Both concept routes remain `noindex` and absent from the sitemap while they live alongside the existing homepage.
 
-To preview locally, serve the repository root with any static HTTP server and open `/v1/`. The Cloudflare Worker permits submissions from `beeverforge.com` and `www.beeverforge.com`; it intentionally rejects localhost.
+To preview locally, serve the repository root with any static HTTP server and open `/v1/` or `/v2/`. The Cloudflare Worker permits submissions from `beeverforge.com` and `www.beeverforge.com`; it intentionally rejects localhost.
 
 ## Brand assets
 

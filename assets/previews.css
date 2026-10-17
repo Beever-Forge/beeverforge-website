@@ -12,3 +12,24 @@
 /* V1 publication: crisp white and cool neutral surfaces. */
 .v1{--paper:#fff;--line:#dfe1e5;background:#fff}.v1 .site-header{background:#fff}.v1 .hero-visual{background:#f1f2f4;border-color:#bdc1c8;box-shadow:20px 20px 0 #e3e5e9}.v1 .hero-visual>div:not(.visual-link){background:#fff;border-color:#d7dbe0}.v1 .comparison{background:#f3f4f6}.v1 .core{background:#e8eaed}.v1 .inquiry-form{background:#fff;border-color:#d7dbe0}
 @media(max-width:640px){.v1 .hero-visual{box-shadow:10px 10px 0 #e3e5e9}}
+
+/* V2: a predominantly graphite product interface, with no warm off-white surfaces. */
+.v2{--paper:#fff;--line:#51515a;background:#1f1f24;color:#fff}
+.v2 .site-header{background:#1f1f24}
+.v2 .editions{background:#25252b;color:#fff}
+.v2 .modules{background:#2b2b32;color:#fff}
+.v2 .faq{background:#25252b;color:#fff}
+.v2 .comparison{background:#303038;color:#fff}
+.v2 .section-intro>p:last-child,.v2 .module-list p,.v2 .faq details p,.v2 .footnote{color:#d6d6db}
+.v2 .edition.community{background:#34343c;color:#fff;border-color:#686873}
+.v2 .edition.enterprise{background:#17171b;color:#fff;border-color:#686873}
+.v2 .edition .eyebrow span{color:#d6d6db}
+.v2 .edition.community .eyebrow,.v2 .module-list small,.v2 .module-list article>span{color:#e5b567}
+.v2 .table-scroll{background:#28282f;border-color:#696972}
+.v2 .comparison thead{background:#151519;color:#fff}
+.v2 .comparison tbody tr:nth-child(even){background:#35353d}
+.v2 .comparison th,.v2 .comparison td{border-color:#55555e}
+.v2 .footnote a{color:#e5b567}
+.v2 .core{background:#303038;color:#fff}
+.v2 .core .text-link{color:#e5b567}
+.v2 .inquiry-form{background:#fff;color:#1f1f24;border-color:#c6c8ce}
