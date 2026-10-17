@@ -1,6 +1,6 @@
 # Final dark design preview
 
-The static preview is at `/final-preview/` in this branch. Serve the repository root locally and open that path. The public homepage, V1, V2, GitHub Pages workflow, DNS and sitemap are unchanged. The preview is `noindex` and is not included in the public deployment artifact.
+The static preview is at `/final-preview/` in this branch. Serve the repository root locally and open that path. The public `main` branch, V1, V2, GitHub Pages workflow, DNS and sitemap remain unchanged until this draft PR is approved and merged. The preview is `noindex` and is not included in the public deployment artifact. This branch also contains the root-ready output, its builder and a matching thank-you page so the proposed release is reviewable before approval.
 
 ## Product sources and availability
 
@@ -19,6 +19,8 @@ Chromium checks passed at 1440 × 900 and 390 × 844: direct access and reload r
 
 Local, unthrottled browser navigation measured `load` at 57 ms on desktop and 50 ms on mobile, with 45,162 transferred bytes and five requests in each run. These are laboratory observations on localhost, not Lighthouse scores or real-user data. Sampled contrast ratios were 16.41:1 for white text on graphite, 11.11:1 for muted text on graphite and 7.09:1 for gold on graphite. These samples do not replace a full accessibility audit.
 
-## Before publishing at the root
+The root-ready builder and metadata were checked locally after the preview review: the generated root is indexable with the correct canonical, preview and thank-you pages remain `noindex`, and V1/V2 emit client-side redirects to `/`. This later root-ready change has not been pushed or browser-tested because the environment's automatic approval review hit a usage limit while requesting browser access. The public site remains unchanged.
 
-After visual approval, adapt this page for `/`: change the brand link to `/`, set `robots` to indexable, add the root canonical and `og:url`, remove preview copy, and make `scripts/build.mjs` generate the approved page so the Pages workflow cannot overwrite it. Update `sitemap.xml` and decide redirects or continued `noindex` treatment for V1 and V2. Test the live form from the public domain and verify the published root before treating the release as complete.
+## Publication gate
+
+The branch already builds the root from the preview source with the `/` brand link, indexable robots directive, root canonical and `og:url`, and without preview copy. The existing sitemap lists only `/`. The builder changes V1 and V2 into `noindex` client-side redirects to the final root, avoiding stale Enterprise claims. GitHub Pages does not provide an HTTP 301 through this static artifact; a server-side redirect would need separate hosting or edge configuration. After visual approval, merge the draft PR, wait for GitHub Pages deployment, then verify HTTPS, the root, assets, metadata and the live form from the public domain before treating the release as complete. Do not change the former OpenFactory domain as part of this release.
