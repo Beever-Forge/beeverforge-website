@@ -1,17 +1,17 @@
 # BeeverForge website
 
-The final dark design candidate is in `final-preview/` on branch `feat/final-dark-preview`. It is a local, non-indexable preview awaiting visual approval. This branch also prepares `index.html` and the matching thank-you page for the eventual root release; nothing changes on the public site until the draft PR is merged. See [FINAL_PREVIEW.md](FINAL_PREVIEW.md) for product-status evidence and release steps.
+The final English website is published at [beeverforge.com](https://beeverforge.com/). It presents the available Community and Enterprise editions, the connected product lifecycle, a capability comparison, frequently asked questions and an Enterprise inquiry form.
 
-The English V1 and V2 are published at `/v1/` and `/v2/`. Both present the Community core, the Enterprise direction, a capability matrix, the planned workflow, and the same inquiry form used on the existing homepage. V1 uses a white base and cool neutral surfaces. V2 uses a predominantly graphite product interface.
+The static source for the homepage is `final-preview/index.html`. `node scripts/build.mjs` produces the publishable `index.html` with the root canonical, Open Graph URL and indexable robots directive. The GitHub Pages workflow runs this build, then deploys the root, shared assets and thank-you page. The V1 and V2 routes are retained as `noindex` client-side redirects to `/`; they are not listed in `sitemap.xml`. The original OpenFactory domain has not been changed.
 
-The GitHub Pages workflow publishes the existing root, shared assets, thank-you page, `/v1/` and `/v2/`. The root is preserved. Both concept routes remain `noindex` and absent from the sitemap while they live alongside the existing homepage.
+Serve the repository root with any static HTTP server for local development. The Cloudflare Worker contact endpoint accepts the public `beeverforge.com` and `www.beeverforge.com` origins; localhost is intentionally excluded. The Resend credential remains in the Worker secret store, not in this repository.
 
-To preview locally, serve the repository root with any static HTTP server and open `/v1/` or `/v2/`. The Cloudflare Worker permits submissions from `beeverforge.com` and `www.beeverforge.com`; it intentionally rejects localhost.
+See [FINAL_PREVIEW.md](FINAL_PREVIEW.md) for design, product-status evidence and verification details.
 
 ## Brand assets
 
-Approved BeeverForge master assets are kept in `assets/`. The wordmark is supplied as the approved vector artwork and must not be recreated as text.
+Approved BeeverForge SVG assets are in `assets/`. Preserve the official vector wordmark rather than recreating it as text.
 
-## Deployment
+## Hosting
 
-The site is ready for GitHub Pages or any static hosting provider. Publish the repository root as the web root and point `beeverforge.com` to the hosting provider. HTTPS must be enabled before the canonical, Open Graph and sitemap URLs are indexed.
+GitHub holds the code; GitHub Pages serves the static website. Hostinger administers the domain. GitHub Pages HTTPS is enforced for `beeverforge.com`. The existing Cloudflare Worker handles form submissions independently of the static site.
