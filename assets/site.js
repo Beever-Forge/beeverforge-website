@@ -30,7 +30,7 @@ document.querySelectorAll('[data-inquiry-form]').forEach((form) => {
     event.preventDefault();
     if (!form.reportValidity()) return;
     if (!endpoint || endpoint.includes('.PENDING.')) {
-      status.textContent = 'The inquiry form is being prepared. Please email contact@beeverforge.com.';
+      status.textContent = form.dataset.unavailableMessage || 'The inquiry form is being prepared. Please email contact@beeverforge.com.';
       status.dataset.state = 'error';
       return;
     }
@@ -39,7 +39,7 @@ document.querySelectorAll('[data-inquiry-form]').forEach((form) => {
     const payload = Object.fromEntries(data.entries());
     payload.source = form.dataset.source;
     submit.disabled = true;
-    status.textContent = 'Sending your inquiry…';
+    status.textContent = form.dataset.pendingMessage || 'Sending your inquiry…';
     status.dataset.state = 'pending';
 
     try {
@@ -49,9 +49,9 @@ document.querySelectorAll('[data-inquiry-form]').forEach((form) => {
         body: JSON.stringify(payload),
       });
       if (!response.ok) throw new Error('Inquiry request failed');
-      window.location.assign('/thank-you/');
+      window.location.assign(form.dataset.successUrl || '/thank-you/');
     } catch {
-      status.textContent = 'We could not send your inquiry. Please try again or email contact@beeverforge.com.';
+      status.textContent = form.dataset.errorMessage || 'We could not send your inquiry. Please try again or email contact@beeverforge.com.';
       status.dataset.state = 'error';
       submit.disabled = false;
     }
