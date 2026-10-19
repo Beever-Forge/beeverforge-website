@@ -49,6 +49,7 @@ document.querySelectorAll('[data-inquiry-form]').forEach((form) => {
         body: JSON.stringify(payload),
       });
       if (!response.ok) throw new Error('Inquiry request failed');
+      try { sessionStorage.setItem('beeverforge-lead-submitted', '1'); } catch {}
       window.location.assign(form.dataset.successUrl || '/thank-you/');
     } catch {
       status.textContent = form.dataset.errorMessage || 'We could not send your inquiry. Please try again or email contact@beeverforge.com.';

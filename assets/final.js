@@ -1,12 +1,96 @@
 const menuButton = document.querySelector('.menu-toggle');
 const menu = document.querySelector('#site-nav');
 const locale = document.documentElement.lang;
+const analyticsId = 'G-JH25XRDJHG';
+const analyticsConsentKey = 'beeverforge-analytics-consent';
 const labels = {
   en: { open: 'Open menu', close: 'Close menu', light: 'Switch to light mode', dark: 'Switch to dark mode', lightText: 'Light mode', darkText: 'Dark mode' },
   es: { open: 'Abrir menú', close: 'Cerrar menú', light: 'Cambiar al modo claro', dark: 'Cambiar al modo oscuro', lightText: 'Modo claro', darkText: 'Modo oscuro' },
   'pt-BR': { open: 'Abrir menu', close: 'Fechar menu', light: 'Mudar para o modo claro', dark: 'Mudar para o modo escuro', lightText: 'Modo claro', darkText: 'Modo escuro' },
 };
 const words = labels[locale] || labels.en;
+const consentPanel = document.querySelector('[data-consent-panel]');
+const consentOpen = document.querySelector('[data-consent-open]');
+const consentAccept = document.querySelector('[data-consent-accept]');
+const consentReject = document.querySelector('[data-consent-reject]');
+const consentDetails = document.querySelector('[data-consent-details]');
+const consentDetailsToggle = document.querySelector('[data-consent-details-toggle]');
+const analyticsToggle = document.querySelector('[data-analytics-toggle]');
+const consentSave = document.querySelector('[data-consent-save]');
+const consentCancel = document.querySelector('[data-consent-cancel]');
+const readAnalyticsConsent = () => {
+  try { return localStorage.getItem(analyticsConsentKey); } catch { return null; }
+};
+const saveAnalyticsConsent = (value) => {
+  try { localStorage.setItem(analyticsConsentKey, value); } catch {}
+};
+const loadGoogleAnalytics = () => {
+  if (window.gtag) return;
+  window.dataLayer = window.dataLayer || [];
+  window.gtag = function(){ window.dataLayer.push(arguments); };
+  window.gtag('js', new Date());
+  window.gtag('consent', 'default', { analytics_storage: 'denied', ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied' });
+  window.gtag('consent', 'update', { analytics_storage: 'granted' });
+  window.gtag('config', analyticsId);
+  const script = document.createElement('script');
+  script.async = true;
+  script.src = `https://www.googletagmanager.com/gtag/js?id=${analyticsId}`;
+  document.head.appendChild(script);
+};
+const showConsentPanel = (showDetails = false) => {
+  if (!consentPanel) return;
+  consentPanel.hidden = false;
+  if (analyticsToggle) analyticsToggle.checked = readAnalyticsConsent() === 'accepted';
+  if (consentDetails) consentDetails.hidden = !showDetails;
+  consentDetailsToggle?.setAttribute('aria-expanded', String(showDetails));
+  if (showDetails) analyticsToggle?.focus();
+};
+const hideConsentPanel = () => {
+  if (consentPanel) consentPanel.hidden = true;
+  consentOpen?.focus();
+};
+const applyAnalyticsConsent = (accepted) => {
+  saveAnalyticsConsent(accepted ? 'accepted' : 'rejected');
+  if (accepted) loadGoogleAnalytics();
+  else {
+    if (window.gtag) window.gtag('consent', 'update', { analytics_storage: 'denied' });
+    clearAnalyticsCookies();
+  }
+  hideConsentPanel();
+};
+const clearAnalyticsCookies = () => {
+  document.cookie.split(';').forEach((cookie) => {
+    const name = cookie.split('=')[0].trim();
+    if (/^_ga(?:_|$)/.test(name)) {
+      document.cookie = `${name}=; Max-Age=0; path=/; SameSite=Lax`;
+      document.cookie = `${name}=; Max-Age=0; path=/; domain=.beeverforge.com; SameSite=Lax`;
+    }
+  });
+};
+const savedAnalyticsConsent = readAnalyticsConsent();
+if (savedAnalyticsConsent === 'accepted') loadGoogleAnalytics();
+else if (!savedAnalyticsConsent) showConsentPanel();
+consentAccept?.addEventListener('click', () => {
+  applyAnalyticsConsent(true);
+});
+consentReject?.addEventListener('click', () => {
+  applyAnalyticsConsent(false);
+});
+consentDetailsToggle?.addEventListener('click', () => {
+  const showDetails = consentDetails?.hidden ?? true;
+  if (consentDetails) consentDetails.hidden = !showDetails;
+  consentDetailsToggle.setAttribute('aria-expanded', String(showDetails));
+  if (showDetails) analyticsToggle?.focus();
+});
+consentSave?.addEventListener('click', () => applyAnalyticsConsent(Boolean(analyticsToggle?.checked)));
+consentCancel?.addEventListener('click', () => showConsentPanel(false));
+consentOpen?.addEventListener('click', () => showConsentPanel(true));
+try {
+  if (sessionStorage.getItem('beeverforge-lead-submitted') === '1') {
+    sessionStorage.removeItem('beeverforge-lead-submitted');
+    if (readAnalyticsConsent() === 'accepted') window.gtag?.('event', 'generate_lead', { form_name: 'Enterprise inquiry' });
+  }
+} catch {}
 if (menuButton && menu) {
   const close = () => {
     menu.classList.remove('open');

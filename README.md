@@ -12,6 +12,8 @@ The translation file has three tab-separated columns: exact English source text,
 
 The form uses the existing Cloudflare Worker endpoint and Resend configuration. The Worker secret is not stored in this repository. The public Worker accepts `beeverforge.com` and `www.beeverforge.com` origins; localhost is intentionally excluded. Local form tests must mock the network response. The visible confirmation page appears only after an HTTP success response. The English, Spanish and Portuguese forms share the same fields, validation and endpoint.
 
+Google Analytics 4 uses measurement ID `G-JH25XRDJHG`. The tag loads only after a visitor accepts analytics cookies; visitors can reject or change their choice through Cookie settings in the footer. A successful Enterprise inquiry is counted as a `generate_lead` event only when analytics consent has been granted.
+
 ## Hosting
 
 GitHub holds the code and GitHub Pages serves the static website through `.github/workflows/deploy-pages.yml` on `main`. Hostinger administers the domain; no DNS change is needed for this release. The retired `/v1/` and `/v2/` routes redirect to `/` with `noindex`. The original OpenFactory domain has not been changed.
