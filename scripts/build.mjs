@@ -55,7 +55,9 @@ function buildPage(locale) {
     .replace('aria-label="Enterprise product lifecycle"', `aria-label="${locale === 'es' ? 'Ciclo de vida del producto Enterprise' : locale === 'pt' ? 'Ciclo de vida do produto Enterprise' : 'Enterprise product lifecycle'}"`)
     .replace('aria-label="Capability comparison table, horizontally scrollable on small screens"', `aria-label="${locale === 'es' ? 'Tabla de comparación, desplazable horizontalmente en pantallas pequeñas' : locale === 'pt' ? 'Tabela de comparação, com rolagem horizontal em telas pequenas' : 'Capability comparison table, horizontally scrollable on small screens'}"`)
     .replace('aria-label="BeeverForge home"', `aria-label="${locale === 'es' ? 'Inicio de BeeverForge' : locale === 'pt' ? 'Página inicial da BeeverForge' : 'BeeverForge home'}"`)
-    .replace('aria-label="Language"', `aria-label="${locale === 'es' ? 'Idioma' : locale === 'pt' ? 'Idioma' : 'Language'}"`);
+    .replace('aria-label="Language"', `aria-label="${locale === 'es' ? 'Idioma' : locale === 'pt' ? 'Idioma' : 'Language'}"`)
+    .replace('aria-label="Open menu"', `aria-label="${locale === 'es' ? 'Abrir menú' : locale === 'pt' ? 'Abrir menu' : 'Open menu'}"`)
+    .replace('aria-label="Switch to light mode"', `aria-label="${locale === 'es' ? 'Cambiar al modo claro' : locale === 'pt' ? 'Mudar para o modo claro' : 'Switch to light mode'}"`);
   return html;
 }
 function thanksPage(locale) {
