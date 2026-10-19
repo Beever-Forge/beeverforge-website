@@ -18,6 +18,7 @@ const consentDetailsToggle = document.querySelector('[data-consent-details-toggl
 const analyticsToggle = document.querySelector('[data-analytics-toggle]');
 const consentSave = document.querySelector('[data-consent-save]');
 const consentCancel = document.querySelector('[data-consent-cancel]');
+let consentReturnFocus = null;
 const readAnalyticsConsent = () => {
   try { return localStorage.getItem(analyticsConsentKey); } catch { return null; }
 };
@@ -39,6 +40,9 @@ const loadGoogleAnalytics = () => {
 };
 const showConsentPanel = (showDetails = false) => {
   if (!consentPanel) return;
+  if (!consentPanel.contains(document.activeElement)) {
+    consentReturnFocus = document.activeElement === document.body ? null : document.activeElement;
+  }
   consentPanel.hidden = false;
   if (analyticsToggle) analyticsToggle.checked = readAnalyticsConsent() === 'accepted';
   if (consentDetails) consentDetails.hidden = !showDetails;
@@ -46,8 +50,11 @@ const showConsentPanel = (showDetails = false) => {
   if (showDetails) analyticsToggle?.focus();
 };
 const hideConsentPanel = () => {
+  const focusedInPanel = consentPanel?.contains(document.activeElement);
   if (consentPanel) consentPanel.hidden = true;
-  consentOpen?.focus();
+  if (consentReturnFocus?.isConnected) consentReturnFocus.focus({ preventScroll: true });
+  else if (focusedInPanel) document.activeElement.blur();
+  consentReturnFocus = null;
 };
 const applyAnalyticsConsent = (accepted) => {
   saveAnalyticsConsent(accepted ? 'accepted' : 'rejected');
