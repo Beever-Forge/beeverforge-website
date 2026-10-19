@@ -1,17 +1,19 @@
 # BeeverForge website
 
-The final English website is published at [beeverforge.com](https://beeverforge.com/). It presents the available Community and Enterprise editions, the connected product lifecycle, a capability comparison, frequently asked questions and an Enterprise inquiry form.
+The production website at [beeverforge.com](https://beeverforge.com/) has complete static pages in English (`/`), Spanish (`/es/`) and Brazilian Portuguese (`/pt/`). The approved vector identity, Community/Enterprise comparison, connected product lifecycle, FAQs and existing Enterprise inquiry form are shared across languages. Visitors can switch between dark and light modes; the choice is stored locally.
 
-The static source for the homepage is `final-preview/index.html`. `node scripts/build.mjs` produces the publishable `index.html` with the root canonical, Open Graph URL and indexable robots directive. The GitHub Pages workflow runs this build, then deploys the root, shared assets and thank-you page. The V1 and V2 routes are retained as `noindex` client-side redirects to `/`; they are not listed in `sitemap.xml`. The original OpenFactory domain has not been changed.
+## Build
 
-Serve the repository root with any static HTTP server for local development. The Cloudflare Worker contact endpoint accepts the public `beeverforge.com` and `www.beeverforge.com` origins; localhost is intentionally excluded. The Resend credential remains in the Worker secret store, not in this repository.
+Edit the English editorial source in `final-preview/index.html` and its Spanish/Portuguese equivalents in `scripts/translations.tsv`. Run `node scripts/build.mjs` to generate all publishable pages, localized confirmation pages, retired-concept redirects and the sitemap. A local static server can serve the repository root for review. The source preview remains `noindex` and is not deployed.
 
-See [FINAL_PREVIEW.md](FINAL_PREVIEW.md) for design, product-status evidence and verification details.
+The translation file has three tab-separated columns: exact English source text, Spanish, Portuguese. The build keeps the same semantic page structure across languages. Shared scripts and styles live in `assets/`.
 
-## Brand assets
+## Contact
 
-Approved BeeverForge SVG assets are in `assets/`. Preserve the official vector wordmark rather than recreating it as text.
+The form uses the existing Cloudflare Worker endpoint and Resend configuration. The Worker secret is not stored in this repository. The public Worker accepts `beeverforge.com` and `www.beeverforge.com` origins; localhost is intentionally excluded. Local form tests must mock the network response. The visible confirmation page appears only after an HTTP success response. The English, Spanish and Portuguese forms share the same fields, validation and endpoint.
 
 ## Hosting
 
-GitHub holds the code; GitHub Pages serves the static website. Hostinger administers the domain. GitHub Pages HTTPS is enforced for `beeverforge.com`. The existing Cloudflare Worker handles form submissions independently of the static site.
+GitHub holds the code and GitHub Pages serves the static website through `.github/workflows/deploy-pages.yml` on `main`. Hostinger administers the domain; no DNS change is needed for this release. The retired `/v1/` and `/v2/` routes redirect to `/` with `noindex`. The original OpenFactory domain has not been changed.
+
+See [RELEASE.md](RELEASE.md) for verification and product-claim notes.
